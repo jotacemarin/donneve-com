@@ -1,0 +1,19 @@
+img.object-fit {
+  height: 40vh;
+  width: 100%;
+  object-fit: scale-down;
+  background-color: #0000001a;
+  border-radius: 6px;
+}
+
+span.fix-file-input {
+  display: none;
+}
+
+.file-input-isfull {
+  &.file-label,
+  &.file-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
