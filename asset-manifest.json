@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/donneve-com/static/css/main.ae8e9ec8.css",
-    "main.js": "/donneve-com/static/js/main.c63e4b71.js",
+    "main.js": "/donneve-com/static/js/main.9423744c.js",
     "static/js/787.7947ac9b.chunk.js": "/donneve-com/static/js/787.7947ac9b.chunk.js",
     "index.html": "/donneve-com/index.html",
     "main.ae8e9ec8.css.map": "/donneve-com/static/css/main.ae8e9ec8.css.map",
-    "main.c63e4b71.js.map": "/donneve-com/static/js/main.c63e4b71.js.map",
+    "main.9423744c.js.map": "/donneve-com/static/js/main.9423744c.js.map",
     "787.7947ac9b.chunk.js.map": "/donneve-com/static/js/787.7947ac9b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ae8e9ec8.css",
-    "static/js/main.c63e4b71.js"
+    "static/js/main.9423744c.js"
   ]
 }
