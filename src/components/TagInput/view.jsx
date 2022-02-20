@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./styles.scss";
 
-export const TagInput = ({ onChange }) => {
+export const TagInput = ({ onChange, disabled = false }) => {
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState("");
 
@@ -54,6 +54,7 @@ export const TagInput = ({ onChange }) => {
         <button
           className="delete is-small"
           onClick={() => handleRemoveTag(tag, index)}
+          disabled={disabled}
         />
       </span>
     ));
@@ -75,7 +76,11 @@ export const TagInput = ({ onChange }) => {
           />
         </div>
         <div className="control">
-          <button className="button is-info" onClick={() => handleAddTag()}>
+          <button
+            className="button is-info"
+            onClick={() => handleAddTag()}
+            disabled={disabled}
+          >
             Add
           </button>
         </div>

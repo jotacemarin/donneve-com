@@ -58,7 +58,12 @@ export const UploadMedia = () => {
       return null;
     }
 
-    return <TagInput onChange={setTags} />;
+    return (
+      <TagInput
+        onChange={setTags}
+        disabled={loadingGetCode || loadingUploadMedia}
+      />
+    );
   };
 
   const renderButton = () => {
@@ -68,7 +73,11 @@ export const UploadMedia = () => {
 
     if (dataGetCode) {
       return (
-        <button className="button is-fullwidth mt-1 is-info" onClick={submit}>
+        <button
+          className="button is-fullwidth mt-1 is-info"
+          onClick={submit}
+          disabled={loadingGetCode || loadingUploadMedia}
+        >
           Upload
         </button>
       );
