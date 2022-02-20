@@ -32,11 +32,15 @@ export const TagInput = ({ onChange }) => {
   };
 
   const handleOnKeyDown = ({ key, keyCode }) => {
-    if (key !== "Enter" || keyCode !== 13) {
-      return null;
+    if (key === "Enter" || keyCode === 13) {
+      handleAddTag();
     }
 
-    handleAddTag();
+    if (key === " " || keyCode === 32) {
+      handleAddTag();
+    }
+
+    return null;
   };
 
   const renderTags = () => {
