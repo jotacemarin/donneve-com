@@ -48,6 +48,7 @@ export const Navbar = () => {
                   className="button is-white is-outlined"
                   href="https://steamcommunity.com/groups/e-bolastrike"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <span className="icon">
                     <i className="fab fa-steam" />

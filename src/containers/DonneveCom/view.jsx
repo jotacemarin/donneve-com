@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { PATH_UPLOAD } from "../../utils/routes";
 
 export const DonneveCom = () => {
   const navigate = useNavigate();
+  const { search } = useLocation();
 
   useEffect(() => {
-    navigate(PATH_UPLOAD);
+    navigate(`${PATH_UPLOAD}${search}`);
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 

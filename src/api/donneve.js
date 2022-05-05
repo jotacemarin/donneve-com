@@ -8,10 +8,12 @@ const filesManager = axios.create({
 });
 
 export const getApiKey = async (code) => {
-  const {
-    data: { apiKey },
-  } = await filesManager.post(`/uploadMedia?code=${code}`);
-  return [...apiKey].join("-");
+  return new Promise(async (resolve, reject) => {
+    filesManager
+      .post(`/uploadMedia?code=${code}`)
+      .then(({ data: { apiKey } }) => resolve([...apiKey].join("-")))
+      .catch(({ response: { data } }) => reject(new Error(`${data.error}, request failed`)));
+  });
 };
 
 export const setTags = async (remoteId, tags) => {

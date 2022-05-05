@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { parse as qsParse } from "query-string";
 import classNames from "classnames";
 import ReactCodeInput from "react-code-input";
 import Layout from "../../components/Layout";
@@ -9,10 +11,12 @@ import { useSize, useUploadMedia, useGetApiKey } from "../../hooks";
 import "./styles.scss";
 
 export const UploadMedia = () => {
+  const { search } = useLocation();
+  const { token } = qsParse(search);
   const [isMobile, setIsMobile] = useState(false);
   const [file, setFile] = useState(null);
   const [tags, setTags] = useState([]);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(token ? token : "");
   const { width } = useSize();
   const {
     data: dataGetCode,
@@ -53,6 +57,14 @@ export const UploadMedia = () => {
     await fetchGetCode(code);
   };
 
+  const renderFileInput = () => {
+    if (dataGetCode) {
+      return <FileInput onChange={setFile} file={file} />;
+    }
+
+    return null;
+  };
+
   const renderTagInput = () => {
     if (!file || !dataGetCode) {
       return null;
@@ -67,11 +79,7 @@ export const UploadMedia = () => {
   };
 
   const renderButton = () => {
-    if (!file) {
-      return null;
-    }
-
-    if (dataGetCode) {
+    if (file && dataGetCode) {
       return (
         <button
           className="button is-fullwidth mt-1 is-info"
@@ -83,6 +91,10 @@ export const UploadMedia = () => {
       );
     }
 
+    if (!file && dataGetCode) {
+      return null;
+    }
+
     return (
       <>
         <div className="mt-1">
@@ -90,6 +102,7 @@ export const UploadMedia = () => {
             type="text"
             fields={6}
             onChange={(value) => setCode(value)}
+            value={code}
           />
         </div>
         <div className="notification is-link is-light mt-1">
@@ -109,9 +122,11 @@ export const UploadMedia = () => {
   };
 
   const renderLoader = () => {
-    const someIsLoading = [loadingGetCode, loadingUploadMedia].some((loader) =>
-      Boolean(loader)
-    );
+    const someIsLoading = [
+      loadingGetCode,
+      loadingUploadMedia
+    ].some((loader) =>Boolean(loader));
+
     if (someIsLoading) {
       return (
         <progress className="progress is-small is-primary mt-2" max="100">
@@ -161,7 +176,7 @@ export const UploadMedia = () => {
             <h1 className="title">Upload image</h1>
 
             <div className="box">
-              <FileInput onChange={setFile} file={file} />
+              {renderFileInput()}
               {renderTagInput()}
               {renderButton()}
               {renderLoader()}
