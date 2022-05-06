@@ -17,7 +17,6 @@ export const useGetApiKey = () => {
       setLoading(false);
       setData(apiKey);
     } catch (error) {
-      console.log("eas", error);
       setLoading(false);
       setError(error.message);
     }

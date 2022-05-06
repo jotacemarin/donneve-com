@@ -33,10 +33,6 @@ export const UploadMedia = () => {
     clear: clearUploadMedia,
   } = useUploadMedia();
 
-  useEffect(() => {
-    setIsMobile(width < 500);
-  }, [width, setIsMobile]);
-
   const clearEvents = (partial = false) => {
     if (partial) {
       setFile(null);
@@ -56,6 +52,21 @@ export const UploadMedia = () => {
   const getApiKey = async () => {
     await fetchGetCode(code);
   };
+
+  useEffect(() => {
+    setIsMobile(width < 500);
+  }, [width, setIsMobile]);
+
+  useEffect(() => {
+    if (token && code) {
+      async function _getApiKey() {
+        await getApiKey();
+      }
+
+      _getApiKey();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, code]);
 
   const renderFileInput = () => {
     if (dataGetCode) {
@@ -109,7 +120,7 @@ export const UploadMedia = () => {
           <span className="icon">
             <i className="fa fa-info-circle" aria-hidden="true" />
           </span>
-          Tell to <strong>botnorrea</strong> to get a code.
+          Chat with <strong>botnorrea</strong> to get a code.
         </div>
         <button
           className="button is-fullwidth mt-1 is-warning"
@@ -125,7 +136,7 @@ export const UploadMedia = () => {
     const someIsLoading = [
       loadingGetCode,
       loadingUploadMedia
-    ].some((loader) =>Boolean(loader));
+    ].some((loader) => Boolean(loader));
 
     if (someIsLoading) {
       return (
