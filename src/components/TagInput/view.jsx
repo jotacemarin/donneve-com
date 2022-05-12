@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./styles.scss";
 
+const CHAR_SPACE = " ";
+
 export const TagInput = ({ onChange, disabled = false }) => {
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState("");
@@ -10,7 +12,14 @@ export const TagInput = ({ onChange, disabled = false }) => {
   }, [tags, onChange]);
 
   const handleAddTag = () => {
-    setTags([...tags, tag]);
+    const stringTag = String(tag);
+    let tagToAdd = [stringTag];
+
+    if (stringTag.includes(CHAR_SPACE)) {
+      tagToAdd = stringTag.split(CHAR_SPACE);
+    }
+
+    setTags([...tags, ...tagToAdd]);
     setTag("");
   };
 
@@ -36,7 +45,7 @@ export const TagInput = ({ onChange, disabled = false }) => {
       handleAddTag();
     }
 
-    if (key === " " || keyCode === 32) {
+    if (key === CHAR_SPACE || keyCode === 32) {
       handleAddTag();
     }
 
