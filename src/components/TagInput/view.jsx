@@ -12,11 +12,12 @@ export const TagInput = ({ onChange, disabled = false }) => {
   }, [tags, onChange]);
 
   const handleAddTag = () => {
-    const stringTag = String(tag);
+    const stringTag = String(tag).trim();
     let tagToAdd = [stringTag];
 
     if (stringTag.includes(CHAR_SPACE)) {
       tagToAdd = stringTag.split(CHAR_SPACE);
+      console.log("tagToAdd", tagToAdd);
     }
 
     setTags([...tags, ...tagToAdd]);
