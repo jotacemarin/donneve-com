@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { PATH_HOME, PATH_UPLOAD, PATH_DONNEVE_COM } from "../../utils/routes";
+import { PATH_HOME, PATH_UPLOAD } from "../../utils/routes";
 import Home from "../Home";
 import NotFound from "../404";
 import UploadMedia from "../UploadMedia";
-import DonneveCom from "../DonneveCom";
 
 export const App = () => {
   const routes = [
@@ -17,11 +16,6 @@ export const App = () => {
       exact: true,
       path: PATH_UPLOAD,
       element: <UploadMedia />,
-    },
-    {
-      exact: true,
-      path: PATH_DONNEVE_COM,
-      element: <DonneveCom />,
     },
     {
       path: "*",

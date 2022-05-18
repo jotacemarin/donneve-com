@@ -1,31 +1,17 @@
-import Layout from "../../components/Layout";
-import "./styles.scss";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { PATH_UPLOAD } from "../../utils/routes";
 
-export const App = () => (
-  <Layout>
-    <div className="has-text-centered">
-      <div className="column is-6 is-offset-3">
-        <h1 className="title">Find by Tags</h1>
-        <div className="box">
-          <div className="field is-grouped">
-            <p className="control is-expanded">
-              <input
-                className="input"
-                type="text"
-                placeholder="Put your tags"
-                disabled
-              />
-            </p>
-            <p className="control">
-              <button className="button is-info" disabled>
-                Search
-              </button>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Layout>
-);
+export const App = () => {
+  const navigate = useNavigate();
+  const { search } = useLocation();
+
+  useEffect(() => {
+    navigate(`${PATH_UPLOAD}${search}`);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, []);
+
+  return <>Redirect</>;
+};
 
 export default App;

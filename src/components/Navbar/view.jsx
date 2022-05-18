@@ -1,11 +1,45 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import { PATH_HOME, PATH_UPLOAD } from "../../utils/routes";
+import { PATH_HOME } from "../../utils/routes";
+import { LEFT_BUTTONS } from "./constants";
 import "./styles.scss";
 
 export const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+
+  const buttonRender = (button, index) => {
+    const { enabled, key, href, icon, label } = button;
+
+    if (!enabled) {
+      return null;
+    }
+
+    let content = (
+      <Link {...button}>
+        <span className="icon">
+          <i className={icon} />
+        </span>
+        <span>{label}</span>
+      </Link>
+    );
+
+    if (href) {
+      content = (
+        <a {...button} target="_blank" rel="noreferrer">
+          <span className="icon">
+            <i className={icon} />
+          </span>
+        </a>
+      );
+    }
+
+    return (
+      <span className="navbar-item" key={`${key}-${index}`}>
+        {content}
+      </span>
+    );
+  };
 
   return (
     <div className="hero-head">
@@ -34,28 +68,7 @@ export const Navbar = () => {
               "is-active": openMenu,
             })}
           >
-            <div className="navbar-end">
-              <span className="navbar-item">
-                <Link to={PATH_UPLOAD} className="button is-white is-outlined">
-                  <span className="icon">
-                    <i className="fa fa-book" />
-                  </span>
-                  <span>Upload media</span>
-                </Link>
-              </span>
-              <span className="navbar-item">
-                <a
-                  className="button is-white is-outlined"
-                  href="https://steamcommunity.com/groups/e-bolastrike"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="icon">
-                    <i className="fab fa-steam" />
-                  </span>
-                </a>
-              </span>
-            </div>
+            <div className="navbar-end">{LEFT_BUTTONS.map(buttonRender)}</div>
           </div>
         </div>
       </nav>
