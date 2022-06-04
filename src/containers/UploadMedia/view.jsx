@@ -134,10 +134,9 @@ export const UploadMedia = () => {
   };
 
   const renderLoader = () => {
-    const someIsLoading = [
-      loadingGetCode,
-      loadingUploadMedia
-    ].some((loader) => Boolean(loader));
+    const someIsLoading = [loadingGetCode, loadingUploadMedia].some((loader) =>
+      Boolean(loader)
+    );
 
     if (someIsLoading) {
       return (

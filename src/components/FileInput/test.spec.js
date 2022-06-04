@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import FileInput from "./view";
 
 const onChange = jest.fn();
-const str = JSON.stringify([{ name: 'chololom' }]);
+const str = JSON.stringify([{ name: "chololom" }]);
 const blob = new Blob([str]);
 
 describe("<FileInput /> standalone", () => {
@@ -28,7 +28,7 @@ describe("<FileInput /> with img", () => {
   global.URL.createObjectURL = jest.fn();
 
   let createObjectURL = {};
-  const file = new File([blob], 'olongolong.png', { type: 'image/png' });
+  const file = new File([blob], "olongolong.png", { type: "image/png" });
   const synteticEvent = { target: { files: [file] } };
   let wrapper = {};
 
@@ -49,7 +49,7 @@ describe("<FileInput /> with img", () => {
   afterAll(() => {
     global.URL.createObjectURL = createObjectURL;
   });
-  
+
   test("Should be render and click", () => {
     wrapper.find("input").simulate("change", synteticEvent);
     const html = wrapper.html();
@@ -65,7 +65,7 @@ describe("<FileInput /> without change", () => {
   global.URL.createObjectURL = jest.fn();
 
   let createObjectURL = {};
-  const file = new File([blob], 'olongolong.png', { type: 'image/png' });
+  const file = new File([blob], "olongolong.png", { type: "image/png" });
   const synteticEvent = { target: { files: [file] } };
   let wrapper = {};
 
@@ -86,7 +86,7 @@ describe("<FileInput /> without change", () => {
   afterAll(() => {
     global.URL.createObjectURL = createObjectURL;
   });
-  
+
   test("Should be render and click", () => {
     wrapper.find("input").simulate("change", synteticEvent);
     const html = wrapper.html();
@@ -101,7 +101,7 @@ describe("<FileInput /> with video", () => {
   global.URL.createObjectURL = jest.fn();
 
   let createObjectURL = {};
-  const file = new File([blob], 'olongolongo.mp4', { type: 'video/mp4' });
+  const file = new File([blob], "olongolongo.mp4", { type: "video/mp4" });
   const synteticEvent = { target: { files: [file] } };
   let wrapper = {};
 
@@ -122,7 +122,7 @@ describe("<FileInput /> with video", () => {
   afterAll(() => {
     global.URL.createObjectURL = createObjectURL;
   });
-  
+
   test("Should be render and click", () => {
     wrapper.find("input").simulate("change", synteticEvent);
     const html = wrapper.html();
@@ -138,7 +138,9 @@ describe("<FileInput /> other mimetype", () => {
   global.URL.createObjectURL = jest.fn();
 
   let createObjectURL = {};
-  const file = new File([blob], 'olongolongo.xls', { type: 'application/vnd.ms-excel' });
+  const file = new File([blob], "olongolongo.xls", {
+    type: "application/vnd.ms-excel",
+  });
   const synteticEvent = { target: { files: [file] } };
   let wrapper = {};
 
@@ -159,7 +161,7 @@ describe("<FileInput /> other mimetype", () => {
   afterAll(() => {
     global.URL.createObjectURL = createObjectURL;
   });
-  
+
   test("Should be render and click", () => {
     wrapper.find("input").simulate("change", synteticEvent);
     const html = wrapper.html();

@@ -24,8 +24,7 @@ describe("<Layout />", () => {
     const navbar = wrapper.find(Navbar);
     expect(navbar.exists()).toBeTruthy();
   });
-  
-  
+
   test("Should contains children", () => {
     const html = wrapper.html();
     expect(html).toMatch("test");
