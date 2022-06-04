@@ -30,7 +30,7 @@ describe("<UploadMedia /> without token", () => {
 describe("<UploadMedia /> with token", () => {
   test("<UploadMedia /> Should be render snapshot", async () => {
     const wrapper = mount(
-      <MemoryRouter initialEntries={["", { search: "?token=123456" }]} >
+      <MemoryRouter initialEntries={["", { search: "?token=123456" }]}>
         <UploadMedia />
       </MemoryRouter>
     );

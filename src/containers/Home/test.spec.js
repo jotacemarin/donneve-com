@@ -15,7 +15,7 @@ describe("<Home /> render", () => {
 
   test("<Home /> Should be render with querystring", () => {
     const wrapper = shallow(
-      <MemoryRouter initialEntries={["", { search: "?token=123456" }]} >
+      <MemoryRouter initialEntries={["", { search: "?token=123456" }]}>
         <Home />
       </MemoryRouter>
     );
