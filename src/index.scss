@@ -26,3 +26,7 @@ body {
   padding: 3rem 0;
   line-height: 1.5;
 }
+
+.hero.is-info a.navbar-item:hover {
+  background-color: unset;
+}

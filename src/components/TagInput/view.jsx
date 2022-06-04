@@ -17,7 +17,6 @@ export const TagInput = ({ onChange, disabled = false }) => {
 
     if (stringTag.includes(CHAR_SPACE)) {
       tagToAdd = stringTag.split(CHAR_SPACE);
-      console.log("tagToAdd", tagToAdd);
     }
 
     setTags([...tags, ...tagToAdd]);

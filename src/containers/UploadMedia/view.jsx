@@ -125,6 +125,7 @@ export const UploadMedia = () => {
         <button
           className="button is-fullwidth mt-1 is-warning"
           onClick={getApiKey}
+          disabled={!code}
         >
           Validate code
         </button>

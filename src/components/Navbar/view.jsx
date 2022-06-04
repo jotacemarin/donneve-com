@@ -9,14 +9,14 @@ export const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const buttonRender = (button, index) => {
-    const { enabled, key, href, icon, label } = button;
+    const { enabled, key, to, className, icon, label, href } = button;
 
     if (!enabled) {
       return null;
     }
 
     let content = (
-      <Link {...button}>
+      <Link to={to}>
         <span className="icon">
           <i className={icon} />
         </span>
@@ -26,7 +26,7 @@ export const Navbar = () => {
 
     if (href) {
       content = (
-        <a {...button} target="_blank" rel="noreferrer">
+        <a href={href} target="_blank" rel="noreferrer" className={className}>
           <span className="icon">
             <i className={icon} />
           </span>

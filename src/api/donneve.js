@@ -2,7 +2,7 @@ import axios from "axios";
 
 const { REACT_APP_DONNEVE_API } = process.env;
 
-const filesManager = axios.create({
+export const filesManager = axios.create({
   baseURL: REACT_APP_DONNEVE_API,
   timeout: 5000,
 });
