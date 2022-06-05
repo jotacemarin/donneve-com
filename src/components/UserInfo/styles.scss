@@ -1,0 +1,24 @@
+@import "bulma/sass/utilities/_all.sass";
+
+.container-avatar-user-info {
+  @include mobile {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  @include tablet {
+    width: 320px !important;
+    height: 320px !important;
+  }
+}
+
+.avatar-user-info {
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.username-user-info {
+  @include unselectable;
+  padding-top: 0.4em !important;
+}

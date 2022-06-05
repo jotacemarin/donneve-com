@@ -32,7 +32,8 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-      "src/hooks/"
+      "src/hooks/",
+      "src/containers/Login/"
     ]
   },
   "dependencies": {

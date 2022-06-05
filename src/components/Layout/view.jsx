@@ -4,7 +4,7 @@ export const Layout = ({ children }) => (
   <section className="hero is-info is-fullheight">
     <Navbar />
 
-    <div className="hero-body">
+    <div className="hero-body pt-0">
       <div className="container">{children}</div>
     </div>
   </section>
