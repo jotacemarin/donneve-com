@@ -65,6 +65,7 @@ export const Navbar = () => {
           <div
             className={classNames({
               "navbar-menu": true,
+              "donneve-navbar-menu": openMenu,
               "is-active": openMenu,
             })}
           >

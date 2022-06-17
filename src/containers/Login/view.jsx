@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { parse as qsParse } from "query-string";
 import classnames from "classnames";
-import UserInfo from "../../components/UserInfo";
+import UserInfo from "../../containers/UserInfo";
 import * as session from "../../utils/sessionStorage";
 import { PATH_HOME, PATH_UPLOAD } from "../../utils/routes";
 import "./styles.scss";
-import { Link } from "react-router-dom";
 
 const { REACT_APP_HOST, REACT_APP_TELEGRAM_BOT } = process.env;
 
@@ -16,7 +15,7 @@ export const Login = ({ withoutParent = false, align = "center" }) => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const queryParams = qsParse(search);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   const getTgContainer = () => {
     const div = document.getElementById("telegram-widget-container");
@@ -43,28 +42,12 @@ export const Login = ({ withoutParent = false, align = "center" }) => {
   };
 
   const getQueryParams = () => {
-    const {
-      auth_date,
-      first_name,
-      hash,
-      id: telegram_id,
-      last_name,
-      photo_url,
-      username,
-    } = queryParams;
+    const { hash, id, photo_url: avatar } = queryParams;
 
-    const all = [hash, telegram_id].every((element) => Boolean(element));
+    const all = [hash, id].every((element) => Boolean(element));
 
     if (all) {
-      session.setItem(USER, {
-        auth_date,
-        first_name,
-        hash,
-        id: telegram_id,
-        last_name,
-        photo_url,
-        username,
-      });
+      session.setItem(USER, { hash, id, avatar });
 
       return navigate(PATH_HOME);
     }
@@ -81,17 +64,6 @@ export const Login = ({ withoutParent = false, align = "center" }) => {
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
-  const getUser = () => {
-    if (user) {
-      console.log("fetch");
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [user]);
-
   const telegramContainer = () => (
     <div
       id="telegram-widget-container"
@@ -103,10 +75,22 @@ export const Login = ({ withoutParent = false, align = "center" }) => {
     />
   );
 
+  const renderUserInfo = () => {
+    if (user) {
+      return <UserInfo auth={user} />;
+    }
+
+    return (
+      <div className="has-text-centered notification is-info is-light pr-5">
+        Please click in telegram button to sign in!
+      </div>
+    );
+  };
+
   const renderContent = () => (
     <div className="card-content">
       <div className="content">
-        <UserInfo show={Boolean(user)} />
+        {renderUserInfo()}
         {telegramContainer()}
       </div>
     </div>
