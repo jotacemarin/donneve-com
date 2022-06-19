@@ -8,9 +8,13 @@ import FileInput from "../../components/FileInput";
 import TagInput from "../../components/TagInput";
 import Notification from "../../components/Notification";
 import { useSize, useUploadMedia, useGetApiKey } from "../../hooks";
+import * as session from "../../utils/sessionStorage";
+import { PATH_DASHBOARD } from "../../utils/routes";
 import "./styles.scss";
 
-export const UploadMedia = () => {
+const USER = "user";
+
+export const UploadMediaPage = () => {
   const { search } = useLocation();
   const { token } = qsParse(search);
   const [isMobile, setIsMobile] = useState(false);
@@ -32,6 +36,7 @@ export const UploadMedia = () => {
     refetch: fetchUploadMedia,
     clear: clearUploadMedia,
   } = useUploadMedia();
+  const sessionUser = session.getItem(USER);
 
   const clearEvents = (partial = false) => {
     if (partial) {
@@ -174,16 +179,40 @@ export const UploadMedia = () => {
     );
   };
 
+  const buttons = [
+    {
+      enabled: Boolean(sessionUser),
+      key: "manage-commands",
+      className: "button is-white is-outlined",
+      to: PATH_DASHBOARD,
+      icon: "far fa-window-maximize",
+      label: "Dashboard",
+    },
+    {
+      enabled: true,
+      key: "steam-external",
+      className: "button is-white is-outlined",
+      href: "https://steamcommunity.com/groups/e-bolastrike",
+      icon: "fab fa-steam",
+      label: "Steam group",
+    },
+  ];
+
   return (
     <div className="is-relative">
-      <Layout>
+      <Layout buttons={buttons.filter(({ enabled }) => enabled)}>
         <div
           className={classNames({
             "has-text-centered": true,
             "fix-upload-media": isMobile,
           })}
         >
-          <div className="column is-6 is-offset-3">
+          <div
+            className={classNames({
+              "column is-6 is-offset-3": true,
+              "px-0": isMobile,
+            })}
+          >
             <h1 className="title">Upload image</h1>
 
             <div className="box">
@@ -200,4 +229,4 @@ export const UploadMedia = () => {
   );
 };
 
-export default UploadMedia;
+export default UploadMediaPage;

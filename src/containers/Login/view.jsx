@@ -4,7 +4,7 @@ import { parse as qsParse } from "query-string";
 import classnames from "classnames";
 import UserInfo from "../../containers/UserInfo";
 import * as session from "../../utils/sessionStorage";
-import { PATH_HOME, PATH_UPLOAD } from "../../utils/routes";
+import { PATH_HOME, PATH_UPLOAD, PATH_DASHBOARD } from "../../utils/routes";
 import "./styles.scss";
 
 const { REACT_APP_HOST, REACT_APP_TELEGRAM_BOT } = process.env;
@@ -100,6 +100,12 @@ export const Login = ({ withoutParent = false, align = "center" }) => {
     <footer className="card-footer">
       <Link to={PATH_UPLOAD} className="card-footer-item">
         Upload media {!user ? "with token" : ""}
+      </Link>
+      <Link
+        to={PATH_DASHBOARD}
+        className={classnames({ "card-footer-item": true, "is-hidden": !user })}
+      >
+        Dashboard
       </Link>
     </footer>
   );

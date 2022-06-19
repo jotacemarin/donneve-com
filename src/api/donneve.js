@@ -12,7 +12,9 @@ export const getApiKey = async (code) => {
     donneveCom
       .post(`/uploadMedia?code=${code}`)
       .then(({ data: { apiKey } }) => resolve([...apiKey].join("-")))
-      .catch(({ response: { data } }) => reject(new Error(`${data.error}, request failed`)));
+      .catch(({ response: { data } }) =>
+        reject(new Error(`${data.error}, request failed`))
+      );
   });
 };
 
@@ -22,6 +24,25 @@ export const setTags = async (remoteId, tags) => {
 };
 
 export const getAuth = async (userId) => {
-  const { data } = await donneveCom.get("/telegramAuth", { params: { userId } });
+  const params = { userId };
+  const { data } = await donneveCom.get("/telegramAuth", { params });
+  return data;
+};
+
+export const getCommands = async (userId) => {
+  const headers = { "user-id": userId };
+  const { data } = await donneveCom.get("/commands", { headers });
+  return data;
+};
+
+export const getCommand = async (command = "", userId) => {
+  const headers = { "user-id": userId };
+  const { data } = await donneveCom.get(`/getCommand/${command}`, { headers });
+  return data;
+};
+
+export const editCommand = async (command = "", value, userId) => {
+  const headers = { "user-id": userId };
+  const { data } = await donneveCom.post(`/editCommand/${command}`, { value }, { headers });
   return data;
 };

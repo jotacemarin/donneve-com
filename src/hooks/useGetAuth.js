@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAuth } from "../api/donneve";
 
 export const useGetAuth = (userId) => {
+  const [data, setData] = useState(null);
   const [username, setUsername] = useState(null);
   const [isAdmin, setIsAdmin] = useState(null);
   const [isCreator, setIsCreator] = useState(null);
@@ -10,6 +11,7 @@ export const useGetAuth = (userId) => {
   const [error, setError] = useState(null);
 
   async function fetch(userId) {
+    setData(null);
     setIsAdmin(null);
     setIsCreator(null);
     setIsMember(null);
@@ -18,9 +20,37 @@ export const useGetAuth = (userId) => {
 
     try {
       const data = await getAuth(userId);
-      const { username, is_admin, is_creator, is_member } = data;
+      const {
+        username,
+        is_member,
+        is_admin,
+        is_creator,
+        id,
+        id_tg,
+        first_name,
+        last_name,
+        language_code,
+        status,
+        score,
+        createdAt,
+        updatedAt,
+      } = data;
+
+      const user = {
+        id,
+        idTg: id_tg,
+        username,
+        firstName: first_name,
+        lastName: last_name,
+        languageCode: language_code,
+        status,
+        score,
+        createdAt,
+        updatedAt,
+      };
 
       setLoading(false);
+      setData(user);
       setUsername(username);
       setIsAdmin(is_admin);
       setIsCreator(is_creator);
@@ -37,6 +67,7 @@ export const useGetAuth = (userId) => {
   }, []);
 
   return {
+    data,
     username,
     isAdmin,
     isCreator,
