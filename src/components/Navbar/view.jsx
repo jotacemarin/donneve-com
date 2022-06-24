@@ -17,12 +17,12 @@ export const Navbar = ({ fullScreen = false, buttons = [] }) => {
   const buttonRender = (button, index) => {
     const { key, to, className, icon, label, href } = button;
 
-    const classname = classNames({
-      [className]: !isMobile,
-      "is-flex": true,
-      "is-align-items-center": true,
-      "is-align-content-center": true,
-    });
+    const classname = classNames(
+      "is-flex is-align-items-center is-align-content-center",
+      {
+        [className]: !isMobile,
+      }
+    );
 
     let content = (
       <Link to={to} className={classname}>
@@ -54,16 +54,13 @@ export const Navbar = ({ fullScreen = false, buttons = [] }) => {
   return (
     <div className="hero-head">
       <nav className="navbar">
-        <div
-          className={classNames({ container: true, "is-fluid": fullScreen })}
-        >
+        <div className={classNames("container", { "is-fluid": fullScreen })}>
           <div className="navbar-brand">
             <Link to={PATH_HOME} className="navbar-item">
               <strong>Don Neve</strong>
             </Link>
             <span
-              className={classNames({
-                "navbar-burger burger": true,
+              className={classNames("navbar-burger burger", {
                 "is-active": openMenu,
               })}
               onClick={() => setOpenMenu(!openMenu)}
@@ -75,8 +72,7 @@ export const Navbar = ({ fullScreen = false, buttons = [] }) => {
           </div>
 
           <div
-            className={classNames({
-              "navbar-menu": true,
+            className={classNames("navbar-menu", {
               "donneve-navbar-menu": openMenu,
               "is-active": openMenu,
             })}

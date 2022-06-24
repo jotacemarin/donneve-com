@@ -5,7 +5,7 @@ import { useSize } from "../../hooks";
 import "./styles.scss";
 import Commands from "../Commands";
 
-export const CommandsPage = ({ user, isAdmin, loading }) => {
+export const CommandsPage = ({ user, isAdmin }) => {
   const { width } = useSize();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -26,12 +26,12 @@ export const CommandsPage = ({ user, isAdmin, loading }) => {
       <LayoutAdmin isAdmin={isAdmin}>
         <div className="columns">
           <div
-            className={classNames({
-              column: true,
-              "is-half-desktop": true,
-              "is-offset-one-quarter-desktop": true,
-              "px-0": isMobile,
-            })}
+            className={classNames(
+              "column is-half-desktop is-offset-one-quarter-desktop",
+              {
+                "px-0": isMobile,
+              }
+            )}
           >
             {renderCommands()}
           </div>

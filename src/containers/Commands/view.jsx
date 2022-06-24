@@ -12,10 +12,11 @@ export const Commands = ({ user }) => {
   const { commands } = useGetCommands(idTg);
 
   useEffect(() => {
-    if (commands) {
+    if (commands.length !== 0 && filteredCommands.length === 0) {
       setFilteredCommands(commands);
     }
-  }, [commands]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [commands, filteredCommands]);
 
   const renderItem = (command, index) => (
     <Command key={`${command}-${index}`} command={command} userId={idTg} />

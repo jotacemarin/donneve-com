@@ -41,6 +41,9 @@ jobs:
           git config --global user.email "jotacemarin@gmail.com"
           git config --global user.name "Julio Marin"
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run deploy
+          npm run build
+          touch CNAME
+          echo donneve.com >> CNAME
+          npm run gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

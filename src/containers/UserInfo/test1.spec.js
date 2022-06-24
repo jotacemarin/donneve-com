@@ -15,17 +15,17 @@ jest.mock("../../utils/sessionStorage", () => ({
     isAdmin: true,
     isMember: true,
     isCreator: true,
-    loading: false,
+    loading: false
   }),
 }));
 
 jest.mock("../../hooks", () => ({
   useGetAuth: () => ({
     username: "test",
-    isAdmin: true,
-    isMember: true,
-    isCreator: true,
-    loading: false,
+    isAdmin: false,
+    isMember: false,
+    isCreator: false,
+    loading: true
   }),
 }));
 
@@ -34,13 +34,13 @@ import { shallow } from "enzyme";
 import UserInfo from "./view";
 
 describe("<UserInfo />", () => {
-  const auth = { id: "1a2b3c4d", avatar: "photo.png" };
+  const auth = { id: "1a2b3c4d", avatar:"photo.png" };
 
   test("Should be render", () => {
     const view = shallow(<UserInfo auth={auth} />);
 
-    expect(view.html()).toMatch("You&#x27;re admin");
-    expect(view.html()).toMatch("You&#x27;re creator");
-    expect(view.html()).toMatch("You&#x27;re ebola");
+    expect(view.html()).not.toMatch("You&#x27;re admin");
+    expect(view.html()).not.toMatch("You&#x27;re creator");
+    expect(view.html()).not.toMatch("You&#x27;re ebola");
   });
 });

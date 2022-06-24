@@ -13,9 +13,11 @@ export const Command = ({ command, userId }) => {
   } = useEditCommand(command, userId);
 
   useEffect(() => {
-    setCurrentValue(value);
+    if (value !== currentValue) {
+      setCurrentValue(value);
+    }
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [value]);
+  }, [value, currentValue]);
 
   useEffect(() => {
     if (nextValue !== null) {

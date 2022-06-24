@@ -6,7 +6,13 @@ import { getColors } from "../../utils/randomColor";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PieGraph = ({ height, title, label, dataset = [], options }) => {
+export const PieGraph = ({
+  height,
+  title,
+  label,
+  dataset = [],
+  options = {},
+}) => {
   const { height: calculatedHeight } = useSize();
 
   const data = dataset.map(({ data }) => data);
