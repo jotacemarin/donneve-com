@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { PATH_HOME } from "../../utils/routes";
-import { LEFT_BUTTONS } from "./constants";
+import { useSize } from "../../hooks";
 import "./styles.scss";
 
-export const Navbar = () => {
+export const Navbar = ({ fullScreen = false, buttons = [] }) => {
+  const { width } = useSize();
   const [openMenu, setOpenMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(width < 1024);
+  }, [width, setIsMobile]);
 
   const buttonRender = (button, index) => {
-    const { enabled, key, to, className, icon, label, href } = button;
+    const { key, to, className, icon, label, href } = button;
 
-    if (!enabled) {
-      return null;
-    }
+    const classname = classNames(
+      "is-flex is-align-items-center is-align-content-center",
+      {
+        [className]: !isMobile,
+      }
+    );
 
     let content = (
-      <Link to={to}>
+      <Link to={to} className={classname}>
         <span className="icon">
           <i className={icon} />
         </span>
@@ -26,10 +35,11 @@ export const Navbar = () => {
 
     if (href) {
       content = (
-        <a href={href} target="_blank" rel="noreferrer" className={className}>
+        <a href={href} target="_blank" rel="noreferrer" className={classname}>
           <span className="icon">
             <i className={icon} />
           </span>
+          {isMobile && <span>{label}</span>}
         </a>
       );
     }
@@ -44,14 +54,13 @@ export const Navbar = () => {
   return (
     <div className="hero-head">
       <nav className="navbar">
-        <div className="container">
+        <div className={classNames("container", { "is-fluid": fullScreen })}>
           <div className="navbar-brand">
             <Link to={PATH_HOME} className="navbar-item">
               <strong>Don Neve</strong>
             </Link>
             <span
-              className={classNames({
-                "navbar-burger burger": true,
+              className={classNames("navbar-burger burger", {
                 "is-active": openMenu,
               })}
               onClick={() => setOpenMenu(!openMenu)}
@@ -63,13 +72,12 @@ export const Navbar = () => {
           </div>
 
           <div
-            className={classNames({
-              "navbar-menu": true,
+            className={classNames("navbar-menu", {
               "donneve-navbar-menu": openMenu,
               "is-active": openMenu,
             })}
           >
-            <div className="navbar-end">{LEFT_BUTTONS.map(buttonRender)}</div>
+            <div className="navbar-end">{buttons.map(buttonRender)}</div>
           </div>
         </div>
       </nav>

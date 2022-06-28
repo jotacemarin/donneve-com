@@ -1,4 +1,3 @@
-import classnames from "classnames";
 import { useGetAuth } from "../../hooks";
 import "./styles.scss";
 
@@ -43,16 +42,7 @@ export const UserInfo = ({ auth }) => {
   const renderContent = () => {
     if (loading) {
       return (
-        <div
-          className={classnames({
-            "container-avatar-user-info": true,
-            "is-flex": true,
-            "is-align-items-center": true,
-            "is-flex-wrap-wrap": true,
-            "is-align-content-center": true,
-            "is-justify-content-center": true,
-          })}
-        >
+        <div className="container-avatar-user-info is-flex is-align-items-center is-flex-wrap-wrap is-align-content-center is-justify-content-center">
           <progress className="progress is-small is-primary" max="100">
             15%
           </progress>
@@ -68,15 +58,7 @@ export const UserInfo = ({ auth }) => {
         <button className="button is-info is-rounded username-user-info mt-5">
           @{username}
         </button>
-        <div
-          className={classnames({
-            "is-flex": true,
-            "is-align-items-center": true,
-            "is-flex-wrap-wrap": true,
-            "is-align-content-center": true,
-            "is-justify-content-center": true,
-          })}
-        >
+        <div className="is-flex is-align-items-center is-flex-wrap-wrap is-align-content-center is-justify-content-center">
           {renderIsMember()}
           {renderIsCreator()}
           {renderIsAdmin()}
@@ -87,13 +69,7 @@ export const UserInfo = ({ auth }) => {
   };
 
   return (
-    <div
-      className={classnames({
-        "is-flex": true,
-        "is-flex-direction-column": true,
-        "is-align-items-center": true,
-      })}
-    >
+    <div className="is-flex is-flex-direction-column is-align-items-center">
       {renderContent()}
     </div>
   );

@@ -10,22 +10,37 @@ jest.mock("../../utils/sessionStorage", () => ({
     photo_url: "test.png",
     username: "test",
   }),
+  useGetAuth: () => ({
+    username: "test",
+    isAdmin: true,
+    isMember: true,
+    isCreator: true,
+    loading: false,
+  }),
+}));
+
+jest.mock("../../hooks", () => ({
+  useGetAuth: () => ({
+    username: "test",
+    isAdmin: true,
+    isMember: true,
+    isCreator: true,
+    loading: false,
+  }),
 }));
 
 import React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 import UserInfo from "./view";
 
 describe("<UserInfo />", () => {
+  const auth = { id: "1a2b3c4d", avatar: "photo.png" };
+
   test("Should be render", () => {
-    const view = mount(<UserInfo />);
-    expect(view.html()).toMatch("Please click in telegram button to sign in!");
-  });
-  
-  test("Should be render with user info", () => {
-    const view = mount(<UserInfo show />);
-    expect(view.html())
-      .not
-      .toMatch("Please click in telegram button to sign in!");
+    const view = shallow(<UserInfo auth={auth} />);
+
+    expect(view.html()).toMatch("You&#x27;re admin");
+    expect(view.html()).toMatch("You&#x27;re creator");
+    expect(view.html()).toMatch("You&#x27;re ebola");
   });
 });

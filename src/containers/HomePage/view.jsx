@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 import { PATH_UPLOAD } from "../../utils/routes";
 import Login from "../Login";
 
-export const App = () => {
+export const HomePage = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const { token, page } = qsParse(search);
@@ -40,11 +40,21 @@ export const App = () => {
     return <Login />;
   };
 
+  const buttons = [
+    {
+      key: "steam-external",
+      className: "button is-white is-outlined",
+      href: "https://steamcommunity.com/groups/e-bolastrike",
+      icon: "fab fa-steam",
+      label: "Steam group",
+    },
+  ];
+
   return (
     <div className="is-relative">
-      <Layout>{content()}</Layout>
+      <Layout buttons={buttons}>{content()}</Layout>
     </div>
   );
 };
 
-export default App;
+export default HomePage;
